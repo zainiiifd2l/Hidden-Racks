@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Settings | Hidden_Rack</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="../index.html" class="admin-sidebar-brand">
+          HIDDEN_RACK <span class="admin-badge">ADMIN</span>
+        </a>
+      </div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-item">Dashboard</a>
+        <a href="products.html" class="admin-nav-item">Products</a>
+        <a href="add-product.html" class="admin-nav-item">Add Product</a>
+        <a href="categories.html" class="admin-nav-item">Categories</a>
+        <a href="orders.html" class="admin-nav-item">Orders</a>
+        <a href="customers.html" class="admin-nav-item">Customers</a>
+        <a href="reviews.html" class="admin-nav-item">Reviews</a>
+        <a href="inventory.html" class="admin-nav-item">Inventory</a>
+        <a href="settings.html" class="admin-nav-item active">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1 class="admin-page-title">STORE & ADMIN SETTINGS</h1>
+      </div>
+
+      <div class="admin-content">
+
+        <div class="admin-card" style="max-width:800px;">
+          <h3>STORE INFORMATION & SHIPPING CONFIG</h3>
+          <form onsubmit="event.preventDefault(); window.showToast('Store settings saved!', 'success');" style="margin-top:20px;">
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>STORE NAME</label>
+                <input type="text" class="form-control" value="Hidden_Rack Pakistan" />
+              </div>
+              <div class="form-group">
+                <label>SUPPORT EMAIL</label>
+                <input type="email" class="form-control" value="support@hiddenrack.pk" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>FLAT DELIVERY CHARGES (PKR)</label>
+                <input type="number" class="form-control" value="250" />
+              </div>
+              <div class="form-group">
+                <label>FREE DELIVERY THRESHOLD (PKR)</label>
+                <input type="number" class="form-control" value="15000" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>WHATSAPP SUPPORT NUMBER</label>
+              <input type="text" class="form-control" value="+92 300 1234567" />
+            </div>
+
+            <h3 style="margin:30px 0 16px;">ADMIN PROFILE & PASSWORD</h3>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>ADMIN EMAIL</label>
+                <input type="email" class="form-control" value="admin@hiddenrack.pk" />
+              </div>
+              <div class="form-group">
+                <label>NEW PASSWORD</label>
+                <input type="password" class="form-control" placeholder="Leave blank to keep current..." />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" style="margin-top:16px;">SAVE ALL SETTINGS</button>
+          </form>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

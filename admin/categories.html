@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Categories | Admin Hidden_Rack</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="../index.html" class="admin-sidebar-brand">
+          HIDDEN_RACK <span class="admin-badge">ADMIN</span>
+        </a>
+      </div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-item">Dashboard</a>
+        <a href="products.html" class="admin-nav-item">Products</a>
+        <a href="add-product.html" class="admin-nav-item">Add Product</a>
+        <a href="categories.html" class="admin-nav-item active">Categories</a>
+        <a href="orders.html" class="admin-nav-item">Orders</a>
+        <a href="customers.html" class="admin-nav-item">Customers</a>
+        <a href="reviews.html" class="admin-nav-item">Reviews</a>
+        <a href="inventory.html" class="admin-nav-item">Inventory</a>
+        <a href="settings.html" class="admin-nav-item">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1 class="admin-page-title">CATEGORY MANAGEMENT</h1>
+        <button class="btn-primary" onclick="openAddCatModal()" style="padding:10px 20px; font-size:12px;">+ ADD CATEGORY</button>
+      </div>
+
+      <div class="admin-content">
+
+        <div class="category-grid" id="admin-categories-grid" style="grid-template-columns: repeat(3, 1fr); gap:24px;">
+          <!-- Loaded dynamically -->
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Add Category Modal -->
+  <div id="add-cat-modal" class="search-modal-overlay">
+    <div class="search-modal-card" style="max-width:480px;">
+      <div class="search-modal-header">
+        <h3>ADD NEW CATEGORY</h3>
+        <span onclick="closeAddCatModal()" style="cursor:pointer; font-size:24px;">&times;</span>
+      </div>
+      <form onsubmit="handleSaveCategory(event)">
+        <div class="form-group">
+          <label>CATEGORY NAME *</label>
+          <input type="text" id="cat-name-input" class="form-control" placeholder="e.g. Vintage Runners" required />
+        </div>
+        <div class="form-group">
+          <label>IMAGE URL *</label>
+          <input type="url" id="cat-img-input" class="form-control" value="https://images.unsplash.com/photo-1582588678413-dbf45f4823e9?auto=format&fit=crop&w=800&q=80" required />
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; margin-top:10px;">CREATE CATEGORY</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      window.AdminManager.loadCategoriesGrid();
+    });
+
+    function openAddCatModal() {
+      document.getElementById("add-cat-modal").classList.add("active");
+    }
+
+    function closeAddCatModal() {
+      document.getElementById("add-cat-modal").classList.remove("active");
+    }
+
+    function handleSaveCategory(e) {
+      e.preventDefault();
+      const catData = {
+        name: document.getElementById("cat-name-input").value,
+        image: document.getElementById("cat-img-input").value
+      };
+      window.ProductStore.addCategory(catData);
+      window.showToast("New Category Added!", "success");
+      closeAddCatModal();
+      window.AdminManager.loadCategoriesGrid();
+    }
+  </script>
+</body>
+</html>

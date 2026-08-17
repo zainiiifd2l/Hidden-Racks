@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Products | Hidden_Rack Pakistan Thrift Shoes</title>
+  <meta name="description" content="Browse authentic Pakistani thrift footwear catalog. Filter by brand, condition rating, size, and price in PKR. Adidas, Nike, Jordan, New Balance.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* Shop Page Specific Styles */
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .shop-sidebar {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      padding: 24px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .filter-group {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .filter-group:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .filter-title {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      letter-spacing: 0.05em;
+    }
+
+    .filter-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .filter-checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .filter-checkbox-item input {
+      accent-color: var(--text-main);
+      width: 16px;
+      height: 16px;
+    }
+
+    .size-chips-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .size-chip-btn {
+      padding: 8px;
+      border: 1px solid var(--border-light);
+      background-color: var(--bg-secondary);
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .size-chip-btn.active {
+      background-color: var(--text-main);
+      color: var(--text-white);
+      border-color: var(--text-main);
+    }
+
+    .shop-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-light);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sort-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .sort-select {
+      padding: 10px 16px;
+      border: 1px solid var(--border-light);
+      background-color: var(--bg-primary);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 992px) {
+      .shop-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .shop-sidebar {
+        display: none;
+      }
+
+      .shop-sidebar.mobile-open {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 2500;
+        overflow-y: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <span>Premium Thrifted Sneakers • Authentic Finds • Delivery Across Pakistan</span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="mobile-menu-btn" aria-label="Open Menu">
+        <span></span><span></span><span></span>
+      </div>
+
+      <a href="index.html" class="brand-logo">
+        HIDDEN_RACK<span class="accent-dot"></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html" class="active">Shop</a>
+        <a href="shop.html?category=Men">Men</a>
+        <a href="shop.html?category=Women">Women</a>
+        <a href="shop.html?category=Sneakers">Sneakers</a>
+        <a href="shop.html?filter=new">New Arrivals</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="nav-icon-btn search-trigger" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <a href="account.html" class="nav-icon-btn wishlist-nav-link" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge-count wishlist-count-badge" style="display:none;">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="badge-count cart-count-badge" style="display:none;">0</span>
+        </a>
+        <a href="login.html" class="nav-icon-btn user-nav-link" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu-overlay"></div>
+  <aside class="mobile-menu-drawer">
+    <div class="mobile-menu-header">
+      <span class="brand-logo">HIDDEN_RACK<span class="accent-dot"></span></span>
+      <span class="mobile-menu-close">&times;</span>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop All</a>
+      <a href="shop.html?category=Men">Men's Collection</a>
+      <a href="shop.html?category=Women">Women's Collection</a>
+      <a href="shop.html?category=Sneakers">Sneakers</a>
+      <a href="shop.html?filter=new">New Arrivals</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="account.html">My Account</a>
+    </nav>
+  </aside>
+
+  <!-- Shop Header -->
+  <section style="background-color: var(--bg-secondary); padding: 45px 0; border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <h1 class="section-title" id="shop-page-title">ALL THRIFTED PAIRS</h1>
+      <p class="section-subtitle" id="shop-page-subtitle">Authenticated 1-of-1 pre-loved shoes ready for Pakistan dispatch</p>
+    </div>
+  </section>
+
+  <!-- Main Catalog Content -->
+  <section class="section-padding">
+    <div class="container shop-layout">
+
+      <!-- Filters Sidebar -->
+      <aside class="shop-sidebar" id="shop-sidebar">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+          <h3 style="font-size: 16px; font-weight: 800;">FILTERS</h3>
+          <button onclick="resetFilters()" style="font-size: 12px; font-weight: 700; text-decoration: underline;">RESET</button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="filter-group">
+          <h4 class="filter-title">SEARCH PRODUCTS</h4>
+          <input type="text" id="filter-search-input" placeholder="Keyword (e.g. Campus, Dunk)..." oninput="applyFilters()" style="width:100%; padding:10px 12px; border:1px solid var(--border-light); font-size:13px;" />
+        </div>
+
+        <!-- Categories -->
+        <div class="filter-group">
+          <h4 class="filter-title">CATEGORIES</h4>
+          <div class="filter-options-list" id="filter-categories-list">
+            <!-- Dynamically injected -->
+          </div>
+        </div>
+
+        <!-- Brands -->
+        <div class="filter-group">
+          <h4 class="filter-title">BRANDS</h4>
+          <div class="filter-options-list" id="filter-brands-list">
+            <!-- Dynamically injected -->
+          </div>
+        </div>
+
+        <!-- Condition Rating -->
+        <div class="filter-group">
+          <h4 class="filter-title">CONDITION RATING</h4>
+          <div class="filter-options-list">
+            <label class="filter-checkbox-item">
+              <input type="checkbox" value="9.5" onchange="applyFilters()" class="filter-condition-cb" /> 9.5/10 - Mint / Near New
+            </label>
+            <label class="filter-checkbox-item">
+              <input type="checkbox" value="9.0" onchange="applyFilters()" class="filter-condition-cb" /> 9.0/10 - Excellent Condition
+            </label>
+            <label class="filter-checkbox-item">
+              <input type="checkbox" value="8.5" onchange="applyFilters()" class="filter-condition-cb" /> 8.5/10 - Great Thrift Find
+            </label>
+          </div>
+        </div>
+
+        <!-- Price Range PKR -->
+        <div class="filter-group">
+          <h4 class="filter-title">MAX PRICE (PKR)</h4>
+          <input type="range" id="filter-price-range" min="5000" max="25000" step="1000" value="25000" oninput="document.getElementById('price-range-val').textContent = window.ProductStore.formatPKR(this.value); applyFilters();" style="width:100%; accent-color: var(--text-main);" />
+          <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; margin-top:8px;">
+            <span>PKR 5,000</span>
+            <span id="price-range-val">PKR 25,000</span>
+          </div>
+        </div>
+
+        <!-- Size Chips -->
+        <div class="filter-group">
+          <h4 class="filter-title">AVAILABLE SIZES</h4>
+          <div class="size-chips-grid">
+            <button class="size-chip-btn" onclick="toggleSizeFilter(this, 'EU 38')">EU 38</button>
+            <button class="size-chip-btn" onclick="toggleSizeFilter(this, 'EU 39')">EU 39</button>
+            <button class="size-chip-btn" onclick="toggleSizeFilter(this, 'EU 40')">EU 40</button>
+            <button class="size-chip-btn" onclick="toggleSizeFilter(this, 'EU 41')">EU 41</button>
+            <button class="size-chip-btn" onclick="toggleSizeFilter(this, 'EU 42')">EU 42</button>
+            <button class="size-chip-btn" onclick="toggleSizeFilter(this, 'EU 43')">EU 43</button>
+            <button class="size-chip-btn" onclick="toggleSizeFilter(this, 'EU 44')">EU 44</button>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Main Products Grid Container -->
+      <div>
+        <div class="shop-topbar">
+          <div style="font-size: 14px; font-weight: 700;">
+            SHOWING <span id="showing-count">0</span> PAIRS
+          </div>
+
+          <div class="sort-wrapper">
+            <label for="sort-select">SORT BY:</label>
+            <select id="sort-select" class="sort-select" onchange="applyFilters()">
+              <option value="newest">Newest Arrivals</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="popularity">Popularity</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="product-grid" id="shop-products-grid">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div id="shop-pagination-container" style="display:flex; justify-content:center; gap:8px; margin-top:40px;">
+          <!-- Pagination Buttons -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <span class="brand-logo" style="color: var(--text-white); margin-bottom: 16px;">HIDDEN_RACK<span class="accent-dot"></span></span>
+          <p>Carefully selected high-quality thrifted and pre-loved shoes in Pakistan. Authentic finds for people who don't follow the ordinary.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>SHOP</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html?category=Sneakers">Sneakers</a></li>
+            <li><a href="shop.html?category=Men">Men</a></li>
+            <li><a href="shop.html?category=Women">Women</a></li>
+            <li><a href="shop.html?filter=new">New Arrivals</a></li>
+            <li><a href="shop.html">All Products</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>CUSTOMER SUPPORT</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="faq.html">Shipping & Delivery</a></li>
+            <li><a href="returns.html">Returns & Exchange</a></li>
+            <li><a href="size-guide.html">Size Guide</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>ACCOUNT</h4>
+          <ul class="footer-links">
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="account.html">My Account</a></li>
+            <li><a href="account.html">Order History</a></li>
+            <li><a href="account.html">Wishlist</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>SOCIAL</h4>
+          <ul class="footer-links">
+            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+            <li><a href="https://tiktok.com" target="_blank">TikTok</a></li>
+            <li><a href="https://wa.me/923001234567" target="_blank">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Hidden_Rack Pakistan. All Rights Reserved.</p>
+        <p>Delivery Across Pakistan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    let activeSizeFilters = [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initFilterControls();
+      parseURLParams();
+      applyFilters();
+    });
+
+    function initFilterControls() {
+      const products = window.ProductStore.getProducts();
+
+      // Load Categories checklist
+      const categories = [...new Set(products.map(p => p.category))];
+      const catBox = document.getElementById("filter-categories-list");
+      catBox.innerHTML = categories.map(c => `
+        <label class="filter-checkbox-item">
+          <input type="checkbox" value="${c}" class="filter-category-cb" onchange="applyFilters()" /> ${c}
+        </label>
+      `).join("");
+
+      // Load Brands checklist
+      const brands = [...new Set(products.map(p => p.brand))];
+      const brandBox = document.getElementById("filter-brands-list");
+      brandBox.innerHTML = brands.map(b => `
+        <label class="filter-checkbox-item">
+          <input type="checkbox" value="${b}" class="filter-brand-cb" onchange="applyFilters()" /> ${b}
+        </label>
+      `).join("");
+    }
+
+    function toggleSizeFilter(btn, size) {
+      btn.classList.toggle("active");
+      if (activeSizeFilters.includes(size)) {
+        activeSizeFilters = activeSizeFilters.filter(s => s !== size);
+      } else {
+        activeSizeFilters.push(size);
+      }
+      applyFilters();
+    }
+
+    function parseURLParams() {
+      const params = new URLSearchParams(window.location.search);
+      
+      const search = params.get("search");
+      if (search) {
+        document.getElementById("filter-search-input").value = search;
+      }
+
+      const catParam = params.get("category");
+      if (catParam) {
+        document.querySelectorAll(".filter-category-cb").forEach(cb => {
+          if (cb.value.toLowerCase() === catParam.toLowerCase()) cb.checked = true;
+        });
+        document.getElementById("shop-page-title").textContent = catParam.toUpperCase() + " COLLECTION";
+      }
+
+      const filterParam = params.get("filter");
+      if (filterParam === "new") {
+        document.getElementById("shop-page-title").textContent = "NEW ARRIVALS DROP";
+      } else if (filterParam === "drop") {
+        document.getElementById("shop-page-title").textContent = "THE HIDDEN DROP (LIMITED)";
+      }
+    }
+
+    function applyFilters() {
+      let products = window.ProductStore.getProducts();
+
+      const searchVal = document.getElementById("filter-search-input").value.toLowerCase().trim();
+      if (searchVal) {
+        products = products.filter(p => p.name.toLowerCase().includes(searchVal) || p.brand.toLowerCase().includes(searchVal) || p.category.toLowerCase().includes(searchVal));
+      }
+
+      // Filter Categories
+      const selectedCats = Array.from(document.querySelectorAll(".filter-category-cb:checked")).map(cb => cb.value);
+      if (selectedCats.length > 0) {
+        products = products.filter(p => selectedCats.includes(p.category) || selectedCats.includes(p.gender));
+      }
+
+      // Filter Brands
+      const selectedBrands = Array.from(document.querySelectorAll(".filter-brand-cb:checked")).map(cb => cb.value);
+      if (selectedBrands.length > 0) {
+        products = products.filter(p => selectedBrands.includes(p.brand));
+      }
+
+      // Filter Condition Ratings
+      const selectedConditions = Array.from(document.querySelectorAll(".filter-condition-cb:checked")).map(cb => parseFloat(cb.value));
+      if (selectedConditions.length > 0) {
+        products = products.filter(p => selectedConditions.includes(p.conditionRating));
+      }
+
+      // Filter Max Price Range
+      const maxPrice = parseFloat(document.getElementById("filter-price-range").value);
+      products = products.filter(p => p.price <= maxPrice);
+
+      // Filter Sizes
+      if (activeSizeFilters.length > 0) {
+        products = products.filter(p => p.sizes.some(s => activeSizeFilters.includes(s)));
+      }
+
+      // Sort
+      const sortVal = document.getElementById("sort-select").value;
+      if (sortVal === "price-low") {
+        products.sort((a, b) => a.price - b.price);
+      } else if (sortVal === "price-high") {
+        products.sort((a, b) => b.price - a.price);
+      } else if (sortVal === "newest") {
+        products.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
+      } else if (sortVal === "popularity") {
+        products.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+      }
+
+      currentPage = 1;
+      filteredProducts = products;
+      renderPaginatedProducts();
+    }
+
+    let currentPage = 1;
+    let itemsPerPage = 8;
+    let filteredProducts = [];
+
+    function renderPaginatedProducts() {
+      document.getElementById("showing-count").textContent = filteredProducts.length;
+      const grid = document.getElementById("shop-products-grid");
+      const paginationContainer = document.getElementById("shop-pagination-container");
+
+      if (filteredProducts.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: 60px 0; text-align: center;">
+            <h3>No Thrift Pairs Found Matching Your Filters</h3>
+            <p style="color:var(--text-muted); margin-top:8px;">Try clearing search or adjusting condition and price sliders.</p>
+            <button class="btn-primary" onclick="resetFilters()" style="margin-top:20px;">RESET ALL FILTERS</button>
+          </div>
+        `;
+        if (paginationContainer) paginationContainer.innerHTML = "";
+        return;
+      }
+
+      const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+      currentPage = Math.max(1, Math.min(currentPage, totalPages));
+
+      const startIdx = (currentPage - 1) * itemsPerPage;
+      const paginatedItems = filteredProducts.slice(startIdx, startIdx + itemsPerPage);
+
+      grid.innerHTML = paginatedItems.map(p => `
+        <div class="product-card">
+          <div class="product-card-media">
+            <div class="product-badges">
+              <span class="condition-badge">${p.condition.split('-')[0]}</span>
+              ${p.newArrival ? '<span class="condition-badge-sm" style="background-color:var(--accent-tan); color:var(--text-main);">NEW</span>' : ''}
+            </div>
+            <button class="product-card-wishlist ${window.CartStore.isInWishlist(p.id) ? 'active' : ''}" onclick="window.CartStore.toggleWishlist('${p.id}'); this.classList.toggle('active');">
+              <svg viewBox="0 0 24 24" fill="${window.CartStore.isInWishlist(p.id) ? 'currentColor' : 'none'}" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </button>
+            <a href="product.html?id=${p.id}">
+              <img src="${p.images[0]}" alt="${p.name}" />
+            </a>
+          </div>
+          <div class="product-card-details">
+            <span class="product-brand">${p.brand}</span>
+            <a href="product.html?id=${p.id}">
+              <h3 class="product-title">${p.name}</h3>
+            </a>
+            <div class="product-price-row">
+              <span class="product-price">${window.ProductStore.formatPKR(p.price)}</span>
+              ${p.originalPrice ? `<span class="product-original-price">${window.ProductStore.formatPKR(p.originalPrice)}</span>` : ''}
+            </div>
+            <div class="product-card-actions">
+              <button class="btn-cart" onclick="window.CartStore.addItem('${p.id}', '${p.sizes[0]}')">ADD TO CART</button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      if (paginationContainer) {
+        if (totalPages <= 1) {
+          paginationContainer.innerHTML = "";
+          return;
+        }
+
+        let buttonsHtml = `
+          <button onclick="changePage(${currentPage - 1})" class="btn-secondary" style="padding:6px 12px; font-size:12px;" ${currentPage === 1 ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>&larr; PREV</button>
+        `;
+
+        for (let i = 1; i <= totalPages; i++) {
+          buttonsHtml += `
+            <button onclick="changePage(${i})" class="${i === currentPage ? 'btn-primary' : 'btn-secondary'}" style="padding:6px 14px; font-size:12px;">${i}</button>
+          `;
+        }
+
+        buttonsHtml += `
+          <button onclick="changePage(${currentPage + 1})" class="btn-secondary" style="padding:6px 12px; font-size:12px;" ${currentPage === totalPages ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>NEXT &rarr;</button>
+        `;
+
+        paginationContainer.innerHTML = buttonsHtml;
+      }
+    }
+
+    function changePage(page) {
+      currentPage = page;
+      renderPaginatedProducts();
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+
+    function resetFilters() {
+      document.getElementById("filter-search-input").value = "";
+      document.querySelectorAll(".filter-category-cb, .filter-brand-cb, .filter-condition-cb").forEach(cb => cb.checked = false);
+      document.getElementById("filter-price-range").value = 25000;
+      document.getElementById("price-range-val").textContent = "PKR 25,000";
+      document.querySelectorAll(".size-chip-btn").forEach(btn => btn.classList.remove("active"));
+      activeSizeFilters = [];
+      applyFilters();
+    }
+  </script>
+</body>
+</html>

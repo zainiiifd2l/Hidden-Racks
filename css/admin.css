@@ -1,0 +1,314 @@
+/* ==========================================================================
+   HIDDEN_RACK - ADMIN DASHBOARD STYLING
+   Clean, Professional, Data-Driven Panel
+   ========================================================================== */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #F4F3F0;
+  color: var(--text-main);
+}
+
+.admin-sidebar {
+  width: 260px;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-dark);
+}
+
+.admin-sidebar-header {
+  padding: 28px 24px;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.admin-sidebar-brand {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-white);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-sidebar-brand span.admin-badge {
+  background-color: var(--accent-tan);
+  color: var(--text-main);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  flex: 1;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 24px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #AAAAAA;
+  transition: all var(--transition-fast);
+}
+
+.admin-nav-item svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.8;
+}
+
+.admin-nav-item:hover,
+.admin-nav-item.active {
+  color: var(--text-white);
+  background-color: var(--bg-charcoal);
+  border-left: 4px solid var(--accent-tan);
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.admin-topbar {
+  height: 70px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+}
+
+.admin-page-title {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.admin-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-user-info {
+  text-align: right;
+}
+
+.admin-user-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.admin-user-role {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.admin-content {
+  padding: 32px;
+  flex: 1;
+}
+
+/* Stat Cards */
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+/* Admin Data Tables */
+.admin-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.admin-table th {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--border-light);
+  background-color: var(--bg-secondary);
+}
+
+.admin-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: middle;
+}
+
+.table-product-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 1px solid var(--border-light);
+}
+
+/* Status Pills */
+.status-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.status-pending { background-color: #FFE0B2; color: #E65100; }
+.status-confirmed { background-color: #E1F5FE; color: #0288D1; }
+.status-shipped { background-color: #F3E5F5; color: #7B1FA2; }
+.status-delivered { background-color: #E8F5E9; color: #2E7D32; }
+.status-cancelled { background-color: #FFEBEE; color: #C62828; }
+
+.stock-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+}
+
+.stock-tag.in-stock { background-color: #E8F5E9; color: #2E7D32; }
+.stock-tag.out-of-stock { background-color: #FFEBEE; color: #C62828; }
+
+.badge-tag {
+  background-color: var(--accent-sand);
+  color: var(--text-main);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border: 1px solid var(--accent-tan);
+  margin-right: 4px;
+}
+
+/* Buttons inside table */
+.btn-table-danger {
+  background-color: var(--status-cancelled);
+  color: var(--text-white);
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 2px;
+}
+
+.btn-sm-outline {
+  display: inline-block;
+  border: 1px solid var(--text-main);
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-order-status-select {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border-light);
+  background-color: var(--bg-secondary);
+}
+
+/* Add Product Form Controls */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.form-control {
+  padding: 14px 16px;
+  border: 1.5px solid var(--border-light);
+  background-color: var(--bg-primary);
+  font-size: 14px;
+  transition: border-color var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--text-main);
+}
+
+.admin-cat-card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+.admin-cat-card img {
+  height: 160px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.admin-cat-info {
+  padding: 16px;
+}

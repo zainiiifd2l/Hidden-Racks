@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   HIDDEN_RACK - REACT & TAILWIND STYLING ENGINE
+   STRICT DESIGN RULE: NO GRADIENTS ANYWHERE IN THE WEBSITE.
+   ========================================================================== */
+
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9F8F6;
+  --bg-dark: #121212;
+  --accent-tan: #C4A47C;
+  --text-main: #111111;
+  --text-muted: #666666;
+  --font-heading: 'Syne', 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Custom Solid Buttons */
+.btn-solid-dark {
+  @apply inline-flex items-center justify-center bg-[#111111] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest border border-[#111111] rounded-sm transition-all hover:bg-[#C4A47C] hover:border-[#C4A47C] hover:text-[#111111] hover:-translate-y-0.5;
+}
+
+.btn-solid-outline {
+  @apply inline-flex items-center justify-center bg-transparent text-[#111111] px-8 py-4 font-bold text-xs uppercase tracking-widest border-2 border-[#111111] rounded-sm transition-all hover:bg-[#111111] hover:text-white hover:-translate-y-0.5;
+}
+
+.btn-solid-tan {
+  @apply inline-flex items-center justify-center bg-[#C4A47C] text-[#111111] px-8 py-4 font-bold text-xs uppercase tracking-widest border border-[#C4A47C] rounded-sm transition-all hover:bg-[#111111] hover:text-white hover:border-[#111111];
+}
+
+/* Condition Rating Badge */
+.condition-tag {
+  @apply inline-block bg-[#EFE9E1] text-[#111111] text-[10px] font-extrabold uppercase px-2.5 py-1 border border-[#C4A47C];
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Management | Admin Hidden_Rack</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="../index.html" class="admin-sidebar-brand">
+          HIDDEN_RACK <span class="admin-badge">ADMIN</span>
+        </a>
+      </div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-item">Dashboard</a>
+        <a href="products.html" class="admin-nav-item">Products</a>
+        <a href="add-product.html" class="admin-nav-item">Add Product</a>
+        <a href="categories.html" class="admin-nav-item">Categories</a>
+        <a href="orders.html" class="admin-nav-item">Orders</a>
+        <a href="customers.html" class="admin-nav-item active">Customers</a>
+        <a href="reviews.html" class="admin-nav-item">Reviews</a>
+        <a href="inventory.html" class="admin-nav-item">Inventory</a>
+        <a href="settings.html" class="admin-nav-item">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1 class="admin-page-title">REGISTERED CUSTOMERS</h1>
+      </div>
+
+      <div class="admin-content">
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>CUSTOMER ACCOUNTS</h3>
+          </div>
+
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>CUSTOMER NAME</th>
+                <th>EMAIL</th>
+                <th>PHONE NUMBER</th>
+                <th>SAVED CITY</th>
+                <th>ACCOUNT STATUS</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="admin-customers-table-body">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const users = window.AuthStore.getUsers();
+      const body = document.getElementById("admin-customers-table-body");
+      body.innerHTML = users.map(u => `
+        <tr>
+          <td><strong>${u.name}</strong></td>
+          <td>${u.email}</td>
+          <td>${u.phone || 'N/A'}</td>
+          <td>${u.address ? u.address.city : 'Islamabad'}</td>
+          <td><span class="status-pill status-delivered">Active Account</span></td>
+          <td>
+            <button class="btn-sm-outline" onclick="window.showToast('Account details verified', 'info')">View Details</button>
+          </td>
+        </tr>
+      `).join("");
+    });
+  </script>
+</body>
+</html>

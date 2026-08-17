@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management | Admin Hidden_Rack</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="../index.html" class="admin-sidebar-brand">
+          HIDDEN_RACK <span class="admin-badge">ADMIN</span>
+        </a>
+      </div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-item">Dashboard</a>
+        <a href="products.html" class="admin-nav-item">Products</a>
+        <a href="add-product.html" class="admin-nav-item">Add Product</a>
+        <a href="categories.html" class="admin-nav-item">Categories</a>
+        <a href="orders.html" class="admin-nav-item">Orders</a>
+        <a href="customers.html" class="admin-nav-item">Customers</a>
+        <a href="reviews.html" class="admin-nav-item">Reviews</a>
+        <a href="inventory.html" class="admin-nav-item active">Inventory</a>
+        <a href="settings.html" class="admin-nav-item">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1 class="admin-page-title">INVENTORY & STOCK CONTROL</h1>
+      </div>
+
+      <div class="admin-content">
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>STOCK LEVELS & LOW-STOCK ALERTS</h3>
+            <span style="font-size:12px; font-weight:700; color:var(--status-pending);">Highlighting items with &le; 2 pairs in stock</span>
+          </div>
+
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>PRODUCT NAME</th>
+                <th>SKU</th>
+                <th>AVAILABLE SIZES</th>
+                <th>STOCK QTY</th>
+                <th>STATUS ALERT</th>
+              </tr>
+            </thead>
+            <tbody id="admin-inventory-table-body">
+              <!-- Loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      window.AdminManager.loadInventoryTable();
+    });
+  </script>
+</body>
+</html>

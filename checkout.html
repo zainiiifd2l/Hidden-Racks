@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Hidden_Rack Pakistan</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .checkout-card {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      padding: 32px;
+      margin-bottom: 30px;
+    }
+
+    .checkout-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .payment-option-card {
+      border: 1.5px solid var(--border-light);
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: border-color var(--transition-fast);
+    }
+
+    .payment-option-card.selected {
+      border-color: var(--text-main);
+      background-color: var(--bg-secondary);
+    }
+
+    .payment-option-card input {
+      margin-top: 4px;
+      accent-color: var(--text-main);
+    }
+
+    /* Modal Confirmation */
+    .confirmation-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(18, 18, 18, 0.9);
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .confirmation-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .confirmation-card {
+      background-color: var(--bg-primary);
+      width: 90%;
+      max-width: 600px;
+      border: 2px solid var(--accent-tan);
+      padding: 40px;
+      text-align: center;
+    }
+
+    @media (max-width: 992px) {
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <span>Premium Thrifted Sneakers • Authentic Finds • Delivery Across Pakistan</span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        HIDDEN_RACK<span class="accent-dot"></span>
+      </a>
+      <div style="font-family:var(--font-heading); font-size:12px; font-weight:800; letter-spacing:0.1em;">
+        SECURE CHECKOUT
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Checkout -->
+  <section class="section-padding">
+    <div class="container">
+
+      <form id="checkout-form" onsubmit="handlePlaceOrder(event)">
+        <div class="checkout-grid">
+
+          <div>
+            <!-- Customer Shipping Info -->
+            <div class="checkout-card">
+              <h2 class="checkout-title">1. SHIPPING ADDRESS (PAKISTAN)</h2>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>FULL NAME *</label>
+                  <input type="text" id="chk-name" class="form-control" placeholder="e.g. Zain Malik" required />
+                </div>
+                <div class="form-group">
+                  <label>PHONE NUMBER (WHATSAPP) *</label>
+                  <input type="tel" id="chk-phone" class="form-control" placeholder="0300-1234567" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>EMAIL ADDRESS *</label>
+                <input type="email" id="chk-email" class="form-control" placeholder="zain@example.com" required />
+              </div>
+
+              <div class="form-group">
+                <label>STREET ADDRESS / HOUSE # / SECTOR *</label>
+                <input type="text" id="chk-address" class="form-control" placeholder="House # 45, Street 12, Phase 5, DHA" required />
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label>CITY *</label>
+                  <select id="chk-city" class="form-control" required>
+                    <option value="Islamabad">Islamabad</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Karachi">Karachi</option>
+                    <option value="Rawalpindi">Rawalpindi</option>
+                    <option value="Peshawar">Peshawar</option>
+                    <option value="Quetta">Quetta</option>
+                    <option value="Faisalabad">Faisalabad</option>
+                    <option value="Multan">Multan</option>
+                    <option value="Sialkot">Sialkot</option>
+                    <option value="Other">Other City</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>PROVINCE *</label>
+                  <select id="chk-province" class="form-control" required>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Sindh">Sindh</option>
+                    <option value="KPK">Khyber Pakhtunkhwa (KPK)</option>
+                    <option value="Balochistan">Balochistan</option>
+                    <option value="Islamabad">Islamabad Capital Territory</option>
+                    <option value="AJK">Azad Jammu & Kashmir</option>
+                    <option value="GB">Gilgit-Baltistan</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="checkout-card">
+              <h2 class="checkout-title">2. PAYMENT METHOD</h2>
+
+              <label class="payment-option-card selected" onclick="selectPayment(this, 'COD')">
+                <input type="radio" name="payment-method" value="Cash on Delivery" checked />
+                <div>
+                  <strong style="font-size:15px; display:block;">CASH ON DELIVERY (COD)</strong>
+                  <span style="font-size:13px; color:var(--text-muted);">Pay cash to the courier rider upon package delivery anywhere in Pakistan.</span>
+                </div>
+              </label>
+
+              <label class="payment-option-card" onclick="selectPayment(this, 'BANK')">
+                <input type="radio" name="payment-method" value="Bank Transfer" />
+                <div>
+                  <strong style="font-size:15px; display:block;">DIRECT BANK TRANSFER</strong>
+                  <span style="font-size:13px; color:var(--text-muted);">Transfer funds directly to Bank Al Habib (IBAN: PK92 HABB 0012 3456 7890 1234).</span>
+                </div>
+              </label>
+
+              <label class="payment-option-card" onclick="selectPayment(this, 'CARD')">
+                <input type="radio" name="payment-method" value="Credit/Debit Card" />
+                <div>
+                  <strong style="font-size:15px; display:block;">CREDIT / DEBIT CARD</strong>
+                  <span style="font-size:13px; color:var(--text-muted);">Visa, MasterCard, or UnionPay standard integration.</span>
+                </div>
+              </label>
+            </div>
+
+            <div id="payment-instruction-details" style="display:none; background:var(--bg-secondary); border:1px solid var(--border-light); padding:16px; margin-top:16px; font-size:13px;"></div>
+          </div>
+
+          <!-- Order Summary Sidebar -->
+          <div>
+            <div class="checkout-card" style="position:sticky; top:100px;">
+              <h2 class="checkout-title">YOUR ORDER SUMMARY</h2>
+
+              <div id="checkout-items-list" style="margin-bottom:20px; max-height:260px; overflow-y:auto;">
+                <!-- Populated dynamically -->
+              </div>
+
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <strong id="chk-subtotal">PKR 0</strong>
+              </div>
+
+              <div class="summary-row" id="chk-discount-row" style="display:none; color:var(--status-delivered);">
+                <span>Discount</span>
+                <strong id="chk-discount">PKR 0</strong>
+              </div>
+
+              <div class="summary-row">
+                <span>Delivery Fee (Pakistan)</span>
+                <strong id="chk-delivery">PKR 250</strong>
+              </div>
+
+              <div class="summary-row summary-total-row">
+                <span>TOTAL AMOUNT</span>
+                <span id="chk-total">PKR 0</span>
+              </div>
+
+              <button type="submit" class="btn-primary" style="width:100%; margin-top:24px; padding:18px;">
+                PLACE ORDER NOW &rarr;
+              </button>
+
+              <p style="font-size:11px; color:var(--text-muted); text-align:center; margin-top:16px;">
+                By placing this order, you agree to Hidden_Rack's thrift condition policies and dispatch guidelines.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- Order Confirmation Modal -->
+  <div id="confirmation-modal" class="confirmation-modal-overlay">
+    <div class="confirmation-card">
+      <div style="width:60px; height:60px; background-color:var(--accent-sand); border:2px solid var(--accent-tan); display:inline-flex; align-items:center; justify-content:center; font-size:30px; margin-bottom:20px; color:var(--text-main);">
+        ✓
+      </div>
+      <h2 style="font-size:28px; margin-bottom:10px;">ORDER CONFIRMED!</h2>
+      <p style="color:var(--text-muted); margin-bottom:20px;">Thank you for shopping with Hidden_Rack Pakistan. Your 1-of-1 thrift pair has been reserved for you!</p>
+
+      <div style="background-color:var(--bg-secondary); border:1px solid var(--border-light); padding:20px; text-align:left; margin-bottom:24px; font-size:14px;">
+        <div style="margin-bottom:8px;"><strong>ORDER ID:</strong> <span id="conf-order-id">HR-ORD-9021</span></div>
+        <div style="margin-bottom:8px;"><strong>DELIVERY TO:</strong> <span id="conf-address">House 45, Islamabad</span></div>
+        <div style="margin-bottom:8px;"><strong>PAYMENT METHOD:</strong> <span id="conf-payment">Cash on Delivery</span></div>
+        <div><strong>TOTAL AMOUNT:</strong> <span id="conf-total" style="font-weight:800; font-family:var(--font-heading);">PKR 8,750</span></div>
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:center;">
+        <a href="account.html" class="btn-primary">TRACK ORDER IN DASHBOARD</a>
+        <a href="index.html" class="btn-secondary">BACK TO HOME</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cart = window.CartStore.getCart();
+      if (cart.length === 0) {
+        window.location.href = "cart.html";
+        return;
+      }
+
+      // Pre-fill user data if logged in
+      const currentUser = window.AuthStore.getCurrentUser();
+      if (currentUser) {
+        document.getElementById("chk-name").value = currentUser.name || "";
+        document.getElementById("chk-email").value = currentUser.email || "";
+        document.getElementById("chk-phone").value = currentUser.phone || "";
+        if (currentUser.address) {
+          document.getElementById("chk-address").value = currentUser.address.street || "";
+          document.getElementById("chk-city").value = currentUser.address.city || "Islamabad";
+          document.getElementById("chk-province").value = currentUser.address.province || "Punjab";
+        }
+      }
+
+      renderOrderSummary();
+    });
+
+    function renderOrderSummary() {
+      const cart = window.CartStore.getCart();
+      const itemsContainer = document.getElementById("checkout-items-list");
+      const subtotal = window.CartStore.getSubtotal();
+      const discount = window.CartStore.getDiscountAmount(subtotal);
+      const delivery = window.CartStore.getDeliveryFee(subtotal);
+      const total = Math.max(0, subtotal + delivery - discount);
+      const appliedCoupon = window.CartStore.getAppliedCoupon();
+
+      itemsContainer.innerHTML = cart.map(item => `
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; font-size:13px;">
+          <img src="${item.image}" alt="${item.name}" style="width:50px; height:50px; object-fit:cover; border:1px solid var(--border-light);" />
+          <div style="flex:1;">
+            <div style="font-weight:700;">${item.name}</div>
+            <div style="color:var(--text-muted); font-size:11px;">Size: ${item.selectedSize} | Qty: ${item.quantity}</div>
+          </div>
+          <div style="font-weight:700; font-family:var(--font-heading);">${window.ProductStore.formatPKR(item.price * item.quantity)}</div>
+        </div>
+      `).join("");
+
+      document.getElementById("chk-subtotal").textContent = window.ProductStore.formatPKR(subtotal);
+      document.getElementById("chk-delivery").textContent = delivery === 0 ? "FREE" : window.ProductStore.formatPKR(delivery);
+      
+      const discountRow = document.getElementById("chk-discount-row");
+      if (discountRow) {
+        if (discount > 0) {
+          discountRow.style.display = "flex";
+          document.getElementById("chk-discount").textContent = "-" + window.ProductStore.formatPKR(discount);
+        } else {
+          discountRow.style.display = "none";
+        }
+      }
+
+      document.getElementById("chk-total").textContent = window.ProductStore.formatPKR(total);
+    }
+
+    function selectPayment(element, type) {
+      document.querySelectorAll(".payment-option-card").forEach(c => c.classList.remove("selected"));
+      element.classList.add("selected");
+      element.querySelector("input").checked = true;
+
+      const detailsBox = document.getElementById("payment-instruction-details");
+      if (detailsBox) {
+        if (type === "bank") {
+          detailsBox.style.display = "block";
+          detailsBox.innerHTML = `
+            <strong>BANK TRANSFER DETAILS:</strong><br>
+            Bank Name: Meezan Bank Pakistan<br>
+            Account Title: Hidden_Rack Store<br>
+            IBAN: PK76 MEZN 0001 2345 6789 01<br>
+            <small style="color:var(--text-muted);">Please send transaction screenshot on WhatsApp +92 300 1234567</small>
+          `;
+        } else if (type === "card") {
+          detailsBox.style.display = "block";
+          detailsBox.innerHTML = `
+            <strong>JAZZCASH / EASYPAISA MOBILE WALLET:</strong><br>
+            JazzCash Account: 0300-1234567 (Hidden_Rack)<br>
+            EasyPaisa Account: 0321-9876543 (Hidden_Rack)<br>
+            <small style="color:var(--text-muted);">Instant verification available after order submission</small>
+          `;
+        } else {
+          detailsBox.style.display = "none";
+        }
+      }
+    }
+
+    function handlePlaceOrder(e) {
+      e.preventDefault();
+      const cart = window.CartStore.getCart();
+      if (cart.length === 0) return;
+
+      const subtotal = window.CartStore.getSubtotal();
+      const discount = window.CartStore.getDiscountAmount(subtotal);
+      const deliveryFee = window.CartStore.getDeliveryFee(subtotal);
+      const total = Math.max(0, subtotal + deliveryFee - discount);
+      const email = document.getElementById("chk-email").value;
+
+      const currentUser = window.AuthStore.getCurrentUser();
+
+      const orderData = {
+        customerId: currentUser ? currentUser.id : "guest-" + Date.now(),
+        customerName: document.getElementById("chk-name").value,
+        customerEmail: email,
+        customerPhone: document.getElementById("chk-phone").value,
+        shippingAddress: `${document.getElementById("chk-address").value}, ${document.getElementById("chk-city").value}, ${document.getElementById("chk-province").value}`,
+        items: cart,
+        subtotal: subtotal,
+        deliveryFee: deliveryFee,
+        total: total,
+        paymentMethod: document.querySelector("input[name='payment-method']:checked").value
+      };
+
+      const createdOrder = window.OrderStore.createOrder(orderData);
+      cart.forEach(item => {
+        window.ProductStore.decrementStock(item.id, item.quantity);
+      });
+      window.CartStore.clearCart();
+      window.CartStore.removeCoupon();
+
+      // Show email confirmation toast
+      window.showToast(`Order confirmation email sent to ${email}`, "success");
+
+      // Populate confirmation modal
+      document.getElementById("conf-order-id").textContent = createdOrder.id;
+      document.getElementById("conf-address").textContent = createdOrder.shippingAddress;
+      document.getElementById("conf-payment").textContent = createdOrder.paymentMethod;
+      document.getElementById("conf-total").textContent = window.ProductStore.formatPKR(createdOrder.total);
+
+      document.getElementById("confirmation-modal").classList.add("active");
+    }
+  </script>
+</body>
+</html>

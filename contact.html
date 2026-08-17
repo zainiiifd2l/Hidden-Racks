@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us & Support | Hidden_Rack Pakistan</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <span>Premium Thrifted Sneakers • Authentic Finds • Delivery Across Pakistan</span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="mobile-menu-btn" aria-label="Open Menu">
+        <span></span><span></span><span></span>
+      </div>
+
+      <a href="index.html" class="brand-logo">
+        HIDDEN_RACK<span class="accent-dot"></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contact Banner -->
+  <section style="background-color: var(--bg-secondary); padding: 40px 0; border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <h1 class="section-title">GET IN TOUCH WITH HIDDEN_RACK</h1>
+      <p class="section-subtitle">Have questions about shoe sizing, thrift condition, or your order?</p>
+    </div>
+  </section>
+
+  <!-- Contact Form & Info -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="drop-grid">
+
+        <div>
+          <h2 style="font-size:24px; margin-bottom:16px;">CUSTOMER SUPPORT & INQUIRIES</h2>
+          <p style="color:var(--text-muted); margin-bottom:30px;">Send us a message and our team will respond within 2-4 hours.</p>
+
+          <form onsubmit="event.preventDefault(); window.showToast('Message sent! We will contact you via WhatsApp/Email shortly.', 'success');">
+            <div class="form-group">
+              <label>FULL NAME *</label>
+              <input type="text" class="form-control" placeholder="Zain Malik" required />
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>EMAIL ADDRESS *</label>
+                <input type="email" class="form-control" placeholder="zain@example.com" required />
+              </div>
+              <div class="form-group">
+                <label>PHONE (WHATSAPP) *</label>
+                <input type="tel" class="form-control" placeholder="0300-1234567" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>MESSAGE / INQUIRY *</label>
+              <textarea class="form-control" rows="5" placeholder="Ask us about sizing, sneaker authenticity, or special requests..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">SEND MESSAGE</button>
+          </form>
+        </div>
+
+        <div style="background-color:var(--bg-secondary); border:1px solid var(--border-light); padding:40px;">
+          <h3 style="font-size:20px; font-weight:800; margin-bottom:20px;">DIRECT CONTACT CHANNELS</h3>
+
+          <div style="margin-bottom:24px;">
+            <strong style="display:block; font-size:12px; color:var(--text-muted);">WHATSAPP SUPPORT (FASTEST RESPONSE):</strong>
+            <a href="https://wa.me/923001234567" target="_blank" style="font-size:18px; font-weight:800; color:var(--text-main); text-decoration:underline;">+92 300 1234567</a>
+          </div>
+
+          <div style="margin-bottom:24px;">
+            <strong style="display:block; font-size:12px; color:var(--text-muted);">EMAIL SUPPORT:</strong>
+            <a href="mailto:support@hiddenrack.pk" style="font-size:16px; font-weight:700;">support@hiddenrack.pk</a>
+          </div>
+
+          <div style="margin-bottom:24px;">
+            <strong style="display:block; font-size:12px; color:var(--text-muted);">INSTAGRAM DIRECT:</strong>
+            <a href="https://instagram.com" target="_blank" style="font-size:16px; font-weight:700;">@HiddenRack.PK</a>
+          </div>
+
+          <div style="margin-bottom:24px;">
+            <strong style="display:block; font-size:12px; color:var(--text-muted);">WAREHOUSE LOCATION:</strong>
+            <p style="font-size:14px; color:var(--text-main);">F-8 Markaz, Islamabad, Pakistan (Online Store Only)</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Hidden_Rack Pakistan. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

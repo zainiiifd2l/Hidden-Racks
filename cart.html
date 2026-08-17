@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | Hidden_Rack Pakistan</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .cart-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cart-table th {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px;
+      border-bottom: 2px solid var(--border-light);
+      text-align: left;
+      background-color: var(--bg-secondary);
+    }
+
+    .cart-table td {
+      padding: 20px 16px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+
+    .cart-item-thumb {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border: 1px solid var(--border-light);
+    }
+
+    .qty-control-box {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border-light);
+      background-color: var(--bg-secondary);
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .qty-val {
+      width: 40px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .cart-summary-box {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      padding: 30px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      font-size: 14px;
+      border-bottom: 1px solid var(--bg-secondary);
+    }
+
+    .summary-total-row {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      border-top: 2px solid var(--border-bold);
+      border-bottom: none;
+      padding-top: 16px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 992px) {
+      .cart-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <span>Premium Thrifted Sneakers • Authentic Finds • Delivery Across Pakistan</span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="mobile-menu-btn" aria-label="Open Menu">
+        <span></span><span></span><span></span>
+      </div>
+
+      <a href="index.html" class="brand-logo">
+        HIDDEN_RACK<span class="accent-dot"></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="shop.html?category=Men">Men</a>
+        <a href="shop.html?category=Women">Women</a>
+        <a href="shop.html?category=Sneakers">Sneakers</a>
+        <a href="shop.html?filter=new">New Arrivals</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="nav-icon-btn search-trigger" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <a href="account.html" class="nav-icon-btn wishlist-nav-link" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge-count wishlist-count-badge" style="display:none;">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="badge-count cart-count-badge" style="display:none;">0</span>
+        </a>
+        <a href="login.html" class="nav-icon-btn user-nav-link" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu-overlay"></div>
+  <aside class="mobile-menu-drawer">
+    <div class="mobile-menu-header">
+      <span class="brand-logo">HIDDEN_RACK<span class="accent-dot"></span></span>
+      <span class="mobile-menu-close">&times;</span>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop All</a>
+      <a href="shop.html?category=Men">Men's Collection</a>
+      <a href="shop.html?category=Women">Women's Collection</a>
+      <a href="shop.html?category=Sneakers">Sneakers</a>
+      <a href="shop.html?filter=new">New Arrivals</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="account.html">My Account</a>
+    </nav>
+  </aside>
+
+  <!-- Cart Header -->
+  <section style="background-color: var(--bg-secondary); padding: 40px 0; border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <h1 class="section-title">YOUR SHOPPING CART</h1>
+      <p class="section-subtitle">Review selected 1-of-1 thrifted pairs before checkout</p>
+    </div>
+  </section>
+
+  <!-- Cart Body -->
+  <section class="section-padding">
+    <div class="container">
+
+      <div class="cart-grid" id="cart-content-wrapper">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <span class="brand-logo" style="color: var(--text-white); margin-bottom: 16px;">HIDDEN_RACK<span class="accent-dot"></span></span>
+          <p>Carefully selected high-quality thrifted and pre-loved shoes in Pakistan.</p>
+        </div>
+        <div class="footer-col">
+          <h4>SHOP</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Shoes</a></li>
+            <li><a href="shop.html?filter=new">New Arrivals</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>SUPPORT</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ACCOUNT</h4>
+          <ul class="footer-links">
+            <li><a href="login.html">Login</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>SOCIAL</h4>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/923001234567" target="_blank">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Hidden_Rack Pakistan. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    let discountAmount = 0;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCart();
+    });
+
+    function renderCart() {
+      const cart = window.CartStore.getCart();
+      const wrapper = document.getElementById("cart-content-wrapper");
+
+      if (cart.length === 0) {
+        wrapper.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0;">
+            <h3 style="font-size: 24px; margin-bottom: 12px;">YOUR CART IS CURRENTLY EMPTY</h3>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Explore our rare thrift collection and claim your pair before someone else does!</p>
+            <a href="shop.html" class="btn-primary">EXPLORE THE DROP</a>
+          </div>
+        `;
+        return;
+      }
+
+      const subtotal = window.CartStore.getSubtotal();
+      const discountAmount = window.CartStore.getDiscountAmount(subtotal);
+      const deliveryFee = window.CartStore.getDeliveryFee(subtotal);
+      const total = Math.max(0, subtotal + deliveryFee - discountAmount);
+      const appliedCoupon = window.CartStore.getAppliedCoupon();
+
+      wrapper.innerHTML = `
+        <div>
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>PRODUCT</th>
+                <th>SIZE</th>
+                <th>PRICE</th>
+                <th>QUANTITY</th>
+                <th>SUBTOTAL</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cart.map(item => `
+                <tr>
+                  <td style="display:flex; align-items:center; gap:16px;">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-thumb" />
+                    <div>
+                      <span style="font-size:11px; font-weight:700; color:var(--text-muted);">${item.brand}</span>
+                      <h4 style="font-size:15px; font-weight:700;">${item.name}</h4>
+                      <span class="condition-badge-sm">${item.condition.split('-')[0]}</span>
+                    </div>
+                  </td>
+                  <td><strong>${item.selectedSize}</strong></td>
+                  <td><strong>${window.ProductStore.formatPKR(item.price)}</strong></td>
+                  <td>
+                    <div class="qty-control-box">
+                      <button class="qty-btn" onclick="updateQty('${item.id}', '${item.selectedSize}', ${item.quantity - 1})">-</button>
+                      <span class="qty-val">${item.quantity}</span>
+                      <button class="qty-btn" onclick="updateQty('${item.id}', '${item.selectedSize}', ${item.quantity + 1})">+</button>
+                    </div>
+                  </td>
+                  <td><strong>${window.ProductStore.formatPKR(item.price * item.quantity)}</strong></td>
+                  <td>
+                    <button onclick="removeItem('${item.id}', '${item.selectedSize}')" style="color:var(--status-cancelled); font-size:18px; font-weight:bold;" title="Remove">&times;</button>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+
+          <div style="margin-top: 24px; display:flex; justify-content:space-between;">
+            <a href="shop.html" class="btn-secondary">&larr; CONTINUE SHOPPING</a>
+            <button onclick="clearCart()" style="font-size:12px; font-weight:700; text-decoration:underline;">CLEAR CART</button>
+          </div>
+        </div>
+
+        <div class="cart-summary-box">
+          <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 20px; border-bottom: 1px solid var(--border-light); padding-bottom: 12px;">ORDER SUMMARY</h3>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <strong>${window.ProductStore.formatPKR(subtotal)}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Delivery Across Pakistan</span>
+            <strong>${deliveryFee === 0 ? '<span style="color:var(--status-delivered);">FREE</span>' : window.ProductStore.formatPKR(deliveryFee)}</strong>
+          </div>
+
+          ${deliveryFee > 0 ? `<p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">Free delivery on orders above PKR 15,000</p>` : ''}
+
+          ${discountAmount > 0 ? `
+            <div class="summary-row" style="color:var(--status-delivered);">
+              <span>Coupon (${appliedCoupon.code}) Discount</span>
+              <strong>-${window.ProductStore.formatPKR(discountAmount)}</strong>
+            </div>
+          ` : ''}
+
+          <div class="summary-row summary-total-row">
+            <span>ESTIMATED TOTAL</span>
+            <span>${window.ProductStore.formatPKR(total)}</span>
+          </div>
+
+          <div style="margin: 20px 0;">
+            <label style="font-size:11px; font-weight:700; display:block; margin-bottom:6px;">PROMO CODE (Try 'HIDDEN10', 'THRIFT20', 'FREESHIP'):</label>
+            <div style="display:flex; gap:8px;">
+              <input type="text" id="coupon-code-input" value="${appliedCoupon ? appliedCoupon.code : ''}" placeholder="Enter promo code..." style="flex:1; padding:10px; border:1px solid var(--border-light); font-size:12px;" />
+              ${appliedCoupon ? `<button onclick="removeCoupon()" class="btn-secondary" style="padding:10px 12px; font-size:11px; color:red;">REMOVE</button>` : `<button onclick="applyCoupon()" class="btn-secondary" style="padding:10px 16px; font-size:11px;">APPLY</button>`}
+            </div>
+          </div>
+
+          <a href="checkout.html" class="btn-primary" style="width:100%;">PROCEED TO CHECKOUT &rarr;</a>
+
+          <div style="margin-top:20px; font-size:11px; color:var(--text-muted); text-align:center;">
+            <span>✓ 100% Authentic Guaranteed</span> • <span>✓ Cash on Delivery Available</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateQty(id, size, newQty) {
+      window.CartStore.updateQuantity(id, size, newQty);
+      renderCart();
+    }
+
+    function removeItem(id, size) {
+      window.CartStore.removeItem(id, size);
+      renderCart();
+    }
+
+    function clearCart() {
+      if (confirm("Are you sure you want to clear your cart?")) {
+        window.CartStore.clearCart();
+        renderCart();
+      }
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById("coupon-code-input").value;
+      const res = window.CartStore.applyCoupon(code);
+      if (res.success) {
+        renderCart();
+      }
+    }
+
+    function removeCoupon() {
+      window.CartStore.removeCoupon();
+      renderCart();
+    }
+  </script>
+  </script>
+</body>
+</html>

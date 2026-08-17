@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Hidden_Rack</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <style>
+    body {
+      background-color: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .admin-login-card {
+      background-color: var(--bg-primary);
+      width: 100%;
+      max-width: 420px;
+      border: 2px solid var(--accent-tan);
+      padding: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-login-card">
+    <div style="text-align:center; margin-bottom:30px;">
+      <span class="brand-logo" style="justify-content:center; margin-bottom:8px;">HIDDEN_RACK<span class="accent-dot"></span></span>
+      <span style="font-family:var(--font-heading); font-size:11px; font-weight:800; background-color:var(--accent-tan); color:var(--text-main); padding:2px 8px;">ADMIN CONTROL PANEL</span>
+    </div>
+
+    <form onsubmit="handleAdminLogin(event)">
+      <div class="form-group">
+        <label>ADMIN EMAIL</label>
+        <input type="email" id="admin-email" class="form-control" value="admin@hiddenrack.pk" required />
+      </div>
+
+      <div class="form-group">
+        <label>PASSWORD</label>
+        <input type="password" id="admin-pass" class="form-control" value="admin123" required />
+      </div>
+
+      <button type="submit" class="btn-primary" style="width:100%; margin-top:10px;">ENTER ADMIN DASHBOARD</button>
+    </form>
+
+    <div style="margin-top:20px; font-size:11px; color:var(--text-muted); text-align:center;">
+      Default Credentials: <code>admin@hiddenrack.pk</code> / <code>admin123</code>
+    </div>
+  </div>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+
+  <script>
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById("admin-email").value.trim();
+      const pass = document.getElementById("admin-pass").value.trim();
+
+      const result = await window.AuthStore.loginAdmin(email, pass);
+      if (result.success) {
+        window.showToast("Admin Authenticated!", "success");
+        setTimeout(() => window.location.href = "dashboard.html", 500);
+      } else {
+        window.showToast(result.message, "error");
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Reviews | Admin Hidden_Rack</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="../index.html" class="admin-sidebar-brand">
+          HIDDEN_RACK <span class="admin-badge">ADMIN</span>
+        </a>
+      </div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-item">Dashboard</a>
+        <a href="products.html" class="admin-nav-item">Products</a>
+        <a href="add-product.html" class="admin-nav-item">Add Product</a>
+        <a href="categories.html" class="admin-nav-item">Categories</a>
+        <a href="orders.html" class="admin-nav-item">Orders</a>
+        <a href="customers.html" class="admin-nav-item">Customers</a>
+        <a href="reviews.html" class="admin-nav-item active">Reviews</a>
+        <a href="inventory.html" class="admin-nav-item">Inventory</a>
+        <a href="settings.html" class="admin-nav-item">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1 class="admin-page-title">CUSTOMER REVIEWS MODERATION</h1>
+      </div>
+
+      <div class="admin-content">
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h3>TESTIMONIALS & REVIEWS</h3>
+          </div>
+
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>AUTHOR</th>
+                <th>CITY</th>
+                <th>RATING</th>
+                <th>REVIEW QUOTE</th>
+                <th>STATUS</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="admin-reviews-table-body">
+              <tr>
+                <td><strong>Zain Malik</strong></td>
+                <td>Lahore, Punjab</td>
+                <td style="color:var(--accent-gold);">★★★★★</td>
+                <td>“Got my Adidas Campus pair exactly as shown on the website. Condition was honestly better than expected, 9.5/10 easily.”</td>
+                <td><span class="status-pill status-delivered">Approved</span></td>
+                <td>
+                  <button class="btn-sm-outline" onclick="window.showToast('Review hidden from homepage', 'info')">Hide</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Hamza Khan</strong></td>
+                <td>Islamabad, ICT</td>
+                <td style="color:var(--accent-gold);">★★★★★</td>
+                <td>“Hidden_Rack is the real deal. Finding legit Nike Dunk Pandas in Pakistan for under 12k PKR in pristine condition is unheard of.”</td>
+                <td><span class="status-pill status-delivered">Approved</span></td>
+                <td>
+                  <button class="btn-sm-outline" onclick="window.showToast('Review hidden from homepage', 'info')">Hide</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Ayesha Raza</strong></td>
+                <td>Karachi, Sindh</td>
+                <td style="color:var(--accent-gold);">★★★★★</td>
+                <td>“Super clean packaging and sanitized insoles. Didn’t feel like a thrift shoe at all — felt like brand new unboxing!”</td>
+                <td><span class="status-pill status-delivered">Approved</span></td>
+                <td>
+                  <button class="btn-sm-outline" onclick="window.showToast('Review hidden from homepage', 'info')">Hide</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tableBody = document.getElementById("admin-reviews-table-body");
+      if (!tableBody || !window.ReviewStore) return;
+
+      const reviews = window.ReviewStore.getReviews();
+      tableBody.innerHTML = reviews.map(r => `
+        <tr>
+          <td><strong>${r.customerName}</strong></td>
+          <td>${r.date}</td>
+          <td style="color:var(--accent-gold); font-size:14px;">${"★".repeat(r.rating)}</td>
+          <td>“${r.comment}”</td>
+          <td><span class="status-pill status-delivered">Approved</span></td>
+          <td>
+            <button class="btn-sm-outline" onclick="window.showToast('Review status updated', 'info')">Toggle</button>
+          </td>
+        </tr>
+      `).join("");
+    });
+  </script>
+</body>
+</html>

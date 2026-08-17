@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product | Admin Hidden_Rack</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="../index.html" class="admin-sidebar-brand">
+          HIDDEN_RACK <span class="admin-badge">ADMIN</span>
+        </a>
+      </div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-item">Dashboard</a>
+        <a href="products.html" class="admin-nav-item">Products</a>
+        <a href="add-product.html" class="admin-nav-item active">Add Product</a>
+        <a href="categories.html" class="admin-nav-item">Categories</a>
+        <a href="orders.html" class="admin-nav-item">Orders</a>
+        <a href="customers.html" class="admin-nav-item">Customers</a>
+        <a href="reviews.html" class="admin-nav-item">Reviews</a>
+        <a href="inventory.html" class="admin-nav-item">Inventory</a>
+        <a href="settings.html" class="admin-nav-item">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <h1 class="admin-page-title">ADD NEW THRIFT PRODUCT</h1>
+      </div>
+
+      <div class="admin-content">
+
+        <div class="admin-card" style="max-width: 900px;">
+          <form onsubmit="handleSaveProduct(event)">
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>PRODUCT NAME *</label>
+                <input type="text" id="p-name" class="form-control" placeholder="e.g. Nike Dunk Low 'Panda'" required />
+              </div>
+              <div class="form-group">
+                <label>BRAND *</label>
+                <select id="p-brand" class="form-control" required>
+                  <option value="Adidas">Adidas</option>
+                  <option value="Nike">Nike</option>
+                  <option value="Jordan">Jordan</option>
+                  <option value="New Balance">New Balance</option>
+                  <option value="Puma">Puma</option>
+                  <option value="Converse">Converse</option>
+                  <option value="Vans">Vans</option>
+                  <option value="Asics">Asics</option>
+                  <option value="Salomon">Salomon</option>
+                  <option value="Timberland">Timberland</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>CATEGORY *</label>
+                <select id="p-category" class="form-control" required>
+                  <option value="Sneakers">Sneakers</option>
+                  <option value="Running Shoes">Running Shoes</option>
+                  <option value="Casual Shoes">Casual Shoes</option>
+                  <option value="Boots">Boots</option>
+                  <option value="Men">Men</option>
+                  <option value="Women">Women</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>CONDITION RATING (OUT OF 10) *</label>
+                <select id="p-condition-rating" class="form-control" required>
+                  <option value="9.5">9.5/10 - Near Mint</option>
+                  <option value="9.0" selected>9.0/10 - Excellent Condition</option>
+                  <option value="8.5">8.5/10 - Great Thrift Find</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>PRICE IN PKR *</label>
+                <input type="number" id="p-price" class="form-control" placeholder="8500" required />
+              </div>
+              <div class="form-group">
+                <label>ORIGINAL RETAIL PRICE (PKR)</label>
+                <input type="number" id="p-original-price" class="form-control" placeholder="18500" />
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>AVAILABLE SIZES (COMMA SEPARATED) *</label>
+                <input type="text" id="p-sizes" class="form-control" value="EU 41, EU 42, EU 43" required />
+              </div>
+              <div class="form-group">
+                <label>STOCK QUANTITY *</label>
+                <input type="number" id="p-stock" class="form-control" value="1" min="1" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>UPLOAD PRODUCT IMAGE FILE OR ENTER URL *</label>
+              <div style="display:flex; gap:10px; align-items:center; margin-bottom:8px;">
+                <input type="file" accept="image/*" class="form-control" style="flex:1;" onchange="handleImageFileSelect(this, 'p-img-1')" />
+                <span style="font-size:12px; font-weight:bold; color:var(--text-muted);">OR</span>
+              </div>
+              <input type="text" id="p-img-1" class="form-control" value="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=900&q=80" required placeholder="Image URL or Base64 data..." />
+            </div>
+
+            <div class="form-group">
+              <label>SECONDARY IMAGE FILE OR URL</label>
+              <input type="text" id="p-img-2" class="form-control" value="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80" placeholder="Secondary image URL..." />
+            </div>
+
+            <div class="form-group">
+              <label>THRIFT DESCRIPTION & HISTORY *</label>
+              <textarea id="p-desc" class="form-control" rows="4" required>Authentic pre-loved pair in pristine condition. Disinfected insoles, deep cleaned suede upper, crisp sole condition.</textarea>
+            </div>
+
+            <div style="display:flex; gap:20px; margin:20px 0;">
+              <label style="display:flex; align-items:center; gap:8px; font-weight:700; font-size:13px;">
+                <input type="checkbox" id="p-featured" checked accent-color="var(--text-main)" /> FEATURED ON HOMEPAGE
+              </label>
+              <label style="display:flex; align-items:center; gap:8px; font-weight:700; font-size:13px;">
+                <input type="checkbox" id="p-new" checked accent-color="var(--text-main)" /> MARK AS NEW ARRIVAL
+              </label>
+            </div>
+
+            <div style="display:flex; gap:12px; margin-top:30px;">
+              <button type="submit" class="btn-primary">SAVE PRODUCT TO CATALOG</button>
+              <a href="products.html" class="btn-secondary">CANCEL</a>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+
+    function handleImageFileSelect(fileInput, targetInputId) {
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById(targetInputId).value = e.target.result;
+          window.showToast?.("Local image converted & loaded!", "success");
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+    }
+
+    function handleSaveProduct(e) {
+      e.preventDefault();
+
+      const rating = document.getElementById("p-condition-rating").value;
+      const condLabel = rating === "9.5" ? "9.5/10 - Mint" : rating === "9.0" ? "9.0/10 - Excellent" : "8.5/10 - Very Good";
+
+      const productData = {
+        name: document.getElementById("p-name").value,
+        brand: document.getElementById("p-brand").value,
+        category: document.getElementById("p-category").value,
+        price: parseInt(document.getElementById("p-price").value),
+        originalPrice: parseInt(document.getElementById("p-original-price").value) || null,
+        condition: condLabel,
+        conditionRating: parseFloat(rating),
+        sizes: document.getElementById("p-sizes").value.split(",").map(s=>s.trim()),
+        stockQty: parseInt(document.getElementById("p-stock").value),
+        gender: "Unisex",
+        description: document.getElementById("p-desc").value,
+        authenticity: "100% Genuine Verified Import by Hidden_Rack Team.",
+        featured: document.getElementById("p-featured").checked,
+        newArrival: document.getElementById("p-new").checked,
+        images: [
+          document.getElementById("p-img-1").value,
+          document.getElementById("p-img-2").value
+        ].filter(Boolean)
+      };
+
+      window.ProductStore.addProduct(productData);
+      window.showToast("New product listed successfully!", "success");
+      setTimeout(() => window.location.href = "products.html", 800);
+    }
+  </script>
+</body>
+</html>
